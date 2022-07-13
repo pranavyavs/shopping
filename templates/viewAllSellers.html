@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Start Shop Home List  -->
+	<section class="shop-home-list section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12" style="margin:0 auto">
+				
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>view all sellers</h1>
+							</div>
+						</div>
+					</div>
+					{% for v in data %}
+					<!-- Start Single List  -->
+					<div class="single-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-12" >
+								<div class="list-image overlay">
+									
+									
+								</div>
+							</div>
+							<div class="col-lg-8 col-12 style="margin:0 auto;width=100%">
+								<div class="content">
+								
+									
+									<p class="price with-discount">name:{{v.name}}</p>
+									<p class="price with-discount">dob:{{v.dob}}</p>
+									<p class="price with-discount">gender:{{v.gender}}</p>
+									<p class="price with-discount">country:{{v.country}}</p>
+									<p class="price with-discount">phone:{{v.phone}}</p>
+									<p class="price with-discount">address:{{v.address}}</p>
+									<p class="price with-discount">password:{{v.password}}</p>
+									<p class="price with-discount">status:{{v.status}}</p>
+									<p class="price with-discount">username:{{v.username}}</p>
+									<p class="price with-discount">proofupload:{{v.proofupload}}</p>
+									
+									
+
+										<p class="price with-discount"><a href="{% url 'approve' v.id %}">Approve</a></p>
+									<p class="price with-discount"><a href="{% url 'reject' v.id %}">Reject</a></p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Single List  -->
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Home List  -->
+	{% endblock %}
+		<table>
+			<tr>
+				<th>name</th>
+				<th>dob</th>
+				<th>gender</th>
+				<th>country</th>
+				<th>phone</th>
+				<th>address</th>
+				<th>password</th>
+				<th>status</th>
+				<th>username</th>
+				<th>proofupload</th>
+			</tr>
+			{% for v in data %}
+			<tr>
+				<td>{{v.name}}</td>
+				<td>{{v.dob}}</td>
+				<td>{{v.gender}}</td>
+				<td>{{v.country}}</td>
+				<td>{{v.phone}}</td>
+				<td>{{v.address}}</td>
+				<td>{{v.password}}</td>
+				<td>{{v.status}}</td>
+				<td>{{v.username}}</td>
+				<td>{{v.proofupload}}</td>
+				<td><a href="{% url 'approve' v.id %}">Approve</a></td>
+				<td><a href="{% url 'reject' v.id %}">Reject</a></td>
+			</tr>
+			{% endfor %}
+			
+		</table>
+		
+	

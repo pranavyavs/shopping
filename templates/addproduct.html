@@ -1,0 +1,190 @@
+{% extends 'base3.html' %}
+{% block content %}
+<script src="/static/jquery.min.js"></script>
+<script>
+			$(document).ready(function(){
+										$('.nice-select').hide();
+										$('#category').show();
+										})
+	</script>
+	<script type="text/javascript">
+	
+		function validation()
+			{
+				var alpha=/^[a-zA-Z]+$/;
+				var num=/^[0-9]+$/;
+			
+				var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+				var productname=document.getElementById("productname");
+				var image=document.getElementById("image");
+				var price=document.getElementById("price");
+				var details=document.getElementById("details");
+				var category=document.getElementById("category");
+				var stock=document.getElementById("stock");
+				if(productname.value.length==0)
+					{
+						alert("please enter productname")
+						return false;
+					}
+				elseif(image.value.length==0)
+					{
+						alert("please enter image")
+						return false;
+					}
+				elseif(price.value.length==0)
+					{
+						alert("please enter price")
+						return false;
+					}
+				elseif(details.value.length==0)
+					{
+						alert("please enter details")
+						return false;
+					}
+				elseif(category.value.length==0)
+					{
+						alert("please enter category")
+						return false;
+					}
+				elseif(stock.value.length==0)
+					{
+						alert("please enter stock")
+						return false;
+					}
+				else
+					{
+						return true;
+					}
+				}
+		</script>
+		<script src="/static/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#username").change(function(){
+				var username=$("#username").val();
+				$.ajax({
+					
+					url:"{% url 'checkUsername' %}",
+					data:{'username':username},
+					success:function(data){
+						if(data.valid=="exists")
+						{
+							alert("Username already exists!!!");
+							$("#username").val('');
+						}
+
+					}
+				})
+
+			});
+		});
+      </script>
+		
+			<!-- Start Contact -->
+	<section id="contact-us" class="contact-us section">
+		<div class="container">
+				<div class="contact-head">
+					<div class="row">
+						<div class="col-lg-8 col-12">
+							<div class="form-main">
+								<div class="title">
+									
+									<h3>add product</h3>
+								</div>
+								<form method="post" action="{% url 'addproductAction' %}" enctype="multipart/form-data">
+		                         {% csrf_token %}
+									<div class="row">
+										<div class="col-lg-6 col-12">
+											<div class="form-group">
+												<label>productname<span>*</span></label>
+												<input type="text" class="form-control" name="productname" id="productname">
+											</div>
+										</div>
+										<div class="col-lg-6 col-12">
+											<div class="form-group">
+												<label>image<span>*</span></label>
+												<input type="file" name="file" id="image">
+											</div>
+										</div>
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>price<span>*</span></label>
+												<input type="text" class="form-control" name="price" id="price">
+											</div>	
+										</div>
+										<div class="col-12">
+											<div class="form-group message">
+												<label>details<span>*</span></label>
+												<textarea name="details" class="form-control" rows="10" cols="20" id="details"></textarea>
+											</div>	
+										</div>
+										<div class="col-lg-12 col-12">
+											<div class="form-group message">
+												<label style="margin-left:6px">category<span>*</span></label>
+												<select style="margin-right:40px" name="category" id="category" class="divgender">
+													<option value="">---select---</option>
+													{% for v in category %}
+													<option value="{{v.id}}">{{v.categoryname}}</option>
+													{% endfor %}
+													</select>
+											</div>
+										</div>
+										<div class="col-lg-12 col-12">
+											<div class="form-group" style="margin-bottom:4rem">
+												<label style="margin-left:1px">stock<span>*</span></label>
+											<input type="text" class="form-control" name="stock" id="stock">
+											</div>	
+										</div>
+										<div class="col-12">
+											<div class="form-group button">
+												<button type="submit" class="btn" onclick="return validation"()/>addproduct</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="col-lg-4 col-12">
+							<div class="single-head">
+								<div class="single-info">
+									<i class="fa fa-phone"></i>
+									<h4 class="title">Call us Now:</h4>
+									<ul>
+										<li>+123 456-789-1120</li>
+										<li>+522 672-452-1120</li>
+									</ul>
+								</div>
+								<div class="single-info">
+									<i class="fa fa-envelope-open"></i>
+									<h4 class="title">Email:</h4>
+									<ul>
+										<li><a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a></li>
+										<li><a href="mailto:info@yourwebsite.com">support@yourwebsite.com</a></li>
+									</ul>
+								</div>
+								<div class="single-info">
+									<i class="fa fa-location-arrow"></i>
+									<h4 class="title">Our Address:</h4>
+									<ul>
+										<li>KA-62/1, Travel Agency, 45 Grand Central Terminal, New York.</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!--/ End Contact -->	
+				
+						
+
+	
+		{% if messages %}
+			{% for msg in messages %}
+				<script>
+					alert('{{msg}}')
+				</script>
+			{% endfor %}
+		{% endif %}
+{% endblock %}

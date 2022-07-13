@@ -1,0 +1,101 @@
+
+{% extends 'base4.html' %}
+{% block content %}
+<!-- Start Shop Home List  -->
+	<section class="shop-home-list section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12" style="margin:0 auto">
+				
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>view cart</h1>
+							</div>
+						</div>
+					</div>
+					{% for v in data %}
+					<!-- Start Single List  -->
+					<div class="single-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-12" >
+								<div class="list-image overlay">
+									<img src="{{v.productid.file.url}}" height="100px" width="100px" alt="no pic">
+									
+								</div>
+							</div>
+							<div class="col-lg-8 col-12 style="margin:0 auto;width=100%">
+								<div class="content">
+								
+									<h4 class="file"><a href="{% url 'edit' v.id %}"></a>{{v.productname}}</h4>
+									<p class="price with-discount">productid:{{v.productid.id}}</p>
+									<p class="price with-discount">productname:{{v.productid.productname}}</p>
+									<p class="price with-discount">seller:{{v.sellerid.name}}</p>
+									<p class="price with-discount">shippingadrs:{{v.shippingaddress}}</p>
+									<p class="price with-discount">cntctno:{{v.contactno}}</p>
+									<p class="price with-discount">quantity:{{v.quantity}}</p>
+									<p class="price with-discount">price:{{v.productid.price}}</p>
+									<p class="price with-discount">quantity:{{v.quantity}}</p>
+									<p class="price with-discount">totalprice:{{v.totalprice}}</p>
+									
+									
+									
+
+										<p class="price with-discount"><a href="{% url 'deletecart' v.id %}">Deletecart</a></p>
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Single List  -->
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Home List  -->
+	{% endblock %}
+		<form method="post" action="{% url 'placeorderAction' %}">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<th>productid</th>
+				<th>productname</th>
+				<th>image</th>
+				<th>shippingadress</th>
+				<th>contactno</th>
+				<th>price</th>
+				<th>quantity</th>
+				<th>totalprice</th>
+			</tr>
+				{% for v in data %}
+			<tr> 
+				<td>{{v.productid.id}}</td>
+				<td>{{v.productid.productname}}</td>
+				<td><img src="{{v.productid.file.url}}" height="100px" width="100px" alt="nopic"></td>
+				<td>{{v.shippingadress}}</td>
+				<td>{{v.contactno}}</td>
+				<td>{{v.productid.price}}</td>
+				<td>{{v.quantity}}</td>
+				<td>{{v.totalprice}}</td>
+				<td><a href="{% url 'deletecart' v.id %}">Deletecart</a></td>
+				<td><input type="checkbox" name="checkbox" value="{{v.id}}"></td>
+			</tr>
+				{% endfor %}
+			<tr>
+				<td></td>
+				<td><input type="submit" value="placeorder"></td>
+			</tr> 
+		</table>
+		</form>
+	</body>
+		{% if messages %}
+			{% for msg in messages %}
+				<script>
+					alert('{{msg}}')
+				</script>
+			{% endfor %}
+		{% endif %}
+</html>
+	

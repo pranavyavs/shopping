@@ -1,0 +1,66 @@
+{% extends 'base2.html' %}
+{% block content %}
+<!-- Start Shop Blog  -->
+	<section class="shop-blog section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12" >
+					<div class="section-title">
+						<h3>welcome{{v.username}}</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				
+				<div class="col-lg-4 col-md-6 col-12" style="margin:0 auto">
+					<!-- Start Single Blog  -->
+					<div class="shop-single-blog">
+						
+						<div class="content">
+							
+							<img src="\static\eshop\eshop\images\product-3.jpg" height="5px" width="5px" alt="#">
+							<a href="{% url 'addcategory' %}"><span style="font-size:20px">addcategory</a>
+						</div>
+					</div>
+					<!-- End Single Blog  -->
+				</div>
+				<div class="col-lg-4 col-md-6 col-12" style="margin:0 auto">
+					<!-- Start Single Blog  -->
+					<div class="shop-single-blog">
+						
+						<div class="content">
+							<img src="\static\eshop\eshop\images\product-2.jpg" height="5px" width="5px" alt="#">
+						<a href="{% url 'viewAllSellers' %}"><span style="font-size:20px">view all sellers</a>
+						</div>
+					</div>
+					<!-- End Single Blog  -->
+				</div>
+				
+	
+				
+				<div class="col-lg-4 col-md-6 col-12">
+					<!-- Start Single Blog  -->
+					<div class="shop-single-blog">
+						
+						<div class="content">
+							<img src="\static\eshop\eshop\images\product-4.jpg" height="5px" width="5px" alt="#">
+							<a href="{% url 'logout' %}"><span style="font-size:20px">logout</a>
+							
+						</div>
+					</div>
+					<!-- End Single Blog  -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Blog  -->
+	{% endblock %}
+		{% for v in data %}
+		<h3>welcome{{v.username}}</h3>
+		{% endfor %}
+		<ul>
+			<li><a href="{% url 'addcategory' %}">Addcategory</a></li>
+			<li><a href="{% url 'viewAllSellers' %}">view All Sellers</a></li>
+			<li><a href="{% url 'logout' %}">logout</a></li>
+			
+		</ul>

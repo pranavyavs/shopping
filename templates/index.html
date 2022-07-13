@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+		<ul>
+			<a href="{% url 'buyerregister' %}">
+			<a href="{% url 'sellerregister' %}">
+			<a href="{% url 'login' %}">
+		</ul>
+	
+		{% if messages %}
+			{% for msg in messages %}
+				<script>
+					alert('{{msg}}')
+				</script>
+			{% endfor %}
+		{% endif %}
+		
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base4.html' %}
+{% block content %}
+<!-- Start Shop Home List  -->
+	<section class="shop-home-list section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12" style="margin:0 auto">
+				
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>tracking details</h1>
+							</div>
+						</div>
+					</div>
+					{% for v in data %}
+					<!-- Start Single List  -->
+					<div class="single-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-12" >
+								<div class="list-image overlay">
+									
+									<a href="{% url 'edit' v.id %}" class="buy"><i class="fa fa-shopping-bag"></i></a>
+								</div>
+							</div>
+							<div class="col-lg-8 col-12 style="margin:0 auto;width=100%">
+								<div class="content">
+									<h4 class="file"><a href="{% url 'edit' v.id %}"></a>{{v.productname}}</h4>
+									<p class="price with-discount">date:{{v.date}}</p>
+									<p class="price with-discount">time:{{v.time}}</p>
+									
+									<p class="price with-discount">details:{{v.details}}</p>
+									<p class="price with-discount"><a href="{% url 'delete' v.id %}">Delete</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Single List  -->
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Home List  -->
+	{% endblock %}
+		<form>
+			<table>
+				<tr>
+					<th>date</th>
+					<th>time</th>	
+					<th>details</th>
+				</tr>
+
+				{% for v in data %}
+					
+				<tr>
+					
+					<td>{{v.date}}</td>
+				
+					
+					<td>{{v.time}}</td>
+	
+				 
+				
+					
+					<td>{{v.details}}</td>
+				</tr>
+				
+{% endfor %}
+			</table>
+		</form>
+	

@@ -1,0 +1,160 @@
+{% extends 'base4.html' %}
+{% block content %}
+	<script type="text/javascript">
+		function validation()
+			{
+				var alpha=/^[a-zA-Z]+$/;
+			var num=/^[0-9]+$/;
+			
+			var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+			var shippingaddress=document.getElementById("shippingaddress")
+			var contactno=document.getElementById("contactno")
+			var quantity=document.getElementById(" quantity")
+			var totalprice=document.getElementById("totalprice")
+			if(shippingaddress.value.length==0)
+				{
+					alert("please enter shippingaddress");
+					return false;
+				}
+			elseif(contactno.value.length==0)
+				{
+					alert("please enter contactno");
+					return false;
+				}
+			elseif(quantity.value.length==0)
+				{
+					alert("please enter quantity");
+					return false;
+				}
+			elseif(totalprice.value.length==0)
+				{
+					alert("please enter totalprice");
+					return false;
+				}
+			else
+				{
+					return true;
+				}
+			}
+	</script>	
+			
+<script src="/static/jquery.min.js"></script>
+<script>
+		$(document).ready(function(){
+						$('#quantity').change(function(){
+											var quantity=parseInt($('#quantity').val());
+											var price=parseInt($('#price').val());
+											var totalprice=quantity*price
+											$('#totalprice').val(totalprice);
+											
+
+													  })
+						
+					     })
+</script>
+<!-- Start Contact -->
+	<section id="contact-us" class="contact-us section">
+		<div class="container">
+				<div class="contact-head">
+					<div class="row">
+						<div class="col-lg-8 col-12" style="margin:0 auto">
+							<div class="form-main">
+								<div class="title">
+									
+									<h3>add to cart</h3>
+								</div>
+								<form method="post" action="{% url 'addtocartAction' %}" enctype="multipart/form-data">
+		                         {% csrf_token %}
+								{% for v in data %}
+									
+				
+					
+			
+									<div class="row">
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>id<span>*</span></label>
+												<input type="text" class="form-control" name="productid" value="{{v.id}}" readonly="true">
+											</div>
+										</div>
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>productname<span>*</span></label>
+												<input type="text" class="form-control" name="productname" readonly="true" value="{{v.productname}}">
+											</div>
+										</div>
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>image<span>*</span></label>
+												<img src="{{v.file.url}}" height="100px" width="100px" alt="no pic">
+											</div>
+										</div>
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>price<span>*</span></label>
+												<input type="text" class="form-control" value="{{v.price}}" readonly="true" id="price">
+												
+											</div>
+										</div>
+										{% endfor %}
+
+										
+										<div class="col-12">
+											<div class="form-group mesage">
+											<label>shippingaddress<span>*</span></label>
+											<textarea name="shippingadress" rows="10" cols="20" id="shippingaddress"></textarea>
+											</div>
+										</div>
+										<div class="row">
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>contactno<span>*</span></label>
+												<input type="text" class="form-control" name="contactno" id="contactno">
+											</div>
+										</div>
+										<div class="row">
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>quantity<span>*</span></label>
+												<input type="text" class="form-control" name="quantity" id="quantity">
+											</div>
+										</div>
+										
+										<div class="col-lg-12 col-12">
+											<div class="form-group">
+												<label>totalprice<span>*</span></label>
+												<input type="text" class="form-control" name="totalprice" id="totalprice">
+											</div>
+										</div>
+										
+										
+										<div class="row">
+										<div class="col-12">
+											<div class="form-group button">
+												<button type="submit" class="btn" style="margin-left:276px" onclick="return validation"()/>add to cart</button>
+											</div>
+										</div>
+									</div>
+									
+								</form>
+							</div>
+						</div>
+						<div class="col-lg-4 col-12">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!--/ End Contact -->	
+				
+	
+		{% if messages %}
+			{% for msg in messages %}
+				<script>
+					alert('{{msg}}')
+				</script>
+			{% endfor %}
+		{% endif %}
+
+{% endblock %}

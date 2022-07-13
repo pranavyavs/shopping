@@ -1,0 +1,99 @@
+{% extends 'base4.html' %}
+{% block content %}
+<!-- Start Shop Home List  -->
+	<section class="shop-home-list section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12" style="margin:0 auto">
+				
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>vieworder</h1>
+							</div>
+						</div>
+					</div>
+					{% for v in data %}
+					<!-- Start Single List  -->
+					<div class="single-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-12" >
+								<div class="list-image overlay">
+									<img src="{{v.productid.file.url}}" height="100px" width="100px" alt="no pic">
+									
+								</div>
+							</div>
+							<div class="col-lg-8 col-12 style="margin:0 auto;width=100%">
+								<div class="content">
+								
+									<h4 class="file"><a href="{% url 'edit' v.id %}"></a>{{v.productname}}</h4>
+									<p class="price with-discount">productid:{{v.productid.id}}</p>
+									<p class="price with-discount">productname:{{v.productid.productname}}</p>
+									<p class="price with-discount">seller:{{v.sellerid.name}}</p>
+									<p class="price with-discount">shippingadrs:{{v.shippingaddress}}</p>
+									<p class="price with-discount">quantity:{{v.quantity}}</p>
+									<p class="price with-discount">price:{{v.productid.price}}</p>
+									<p class="price with-discount">totalprice:{{v.totalprice}}</p>
+									<p class="price with-discount">date:{{v.date}}</p>
+									<p class="price with-discount">time:{{v.time}}</p>
+									
+									<p class="price with-discount">status:{{v.status}}</p>
+									{% if v.status == 'pending' %}
+
+										<p class="price with-discount"><a href="{% url 'cancel' v.id %}">Cancel</a></p>
+									{% endif %}	
+										
+											{% if v.status == 'confirm' %}
+												<p class="price with-discount"><a href="{% url 'viewtrackingDetails' v.id %}">viewtrackingDetails</a>
+											{% endif %}
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Single List  -->
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Home List  -->
+	{% endblock %}
+		<table>
+			<tr>
+				<th>productid</th>
+				<th>productname</th>
+				<th>image</th>
+				<th>sellername</th>
+				<th>shippingaddress</th>
+				<th>quantity</th>
+				<th>price</th>
+				<th>totalprice</th>
+				<th>date</th>
+				<th>time</th>
+				<th>status</th>
+			</tr>
+				{% for v in data %}
+				<tr>
+					<td>{{v.productid.id}}</td>
+					<td>{{v.productid.productname}}</td>
+					<td><img src="{{v.productid.file.url}}"height="100px" width="100px" alt="nopic"></td>
+					<td>{{v.sellerid.name}}</td>
+					<td>{{v.shippingaddress}}</td>
+					<td>{{v.quantity}}</td>
+					<td>{{v.productid.price}}</td>
+					<td>{{v.totalprice}}</td>
+					<td>{{v.date}}</td>
+					<td>{{v.time}}</td>
+					<td>{{v.status}}</td>
+					{% if v.status == 'pending' %}
+					<td><a href="{% url 'cancel' v.id %}">Cancel</a></td>
+					{% endif %}
+					{% if v.status == 'confirm' %}
+				<td><a href="{% url 'viewtrackingDetails' v.id %}">viewtrackingDetails</a></td>
+				{% endif %}
+					
+				</tr>
+				{% endfor %}
+		</table>
+	

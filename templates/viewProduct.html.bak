@@ -1,0 +1,80 @@
+{% extends 'base4.html' %}
+{% block content %}
+<!-- Start Shop Home List  -->
+	<section class="shop-home-list section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6 col-12" style="margin:0 auto">
+				
+					<div class="row">
+						<div class="col-12">
+							<div class="shop-section-title">
+								<h1>products</h1>
+							</div>
+						</div>
+					</div>
+					{% for v in data %}
+					<!-- Start Single List  -->
+					<div class="single-list">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-12" >
+								<div class="list-image overlay">
+									<img src="{{v.file.url}}" height="100px" width="100px" alt="no pic">
+									<a href="{% url 'edit' v.id %}" class="buy"><i class="fa fa-shopping-bag"></i></a>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-12 no-padding">
+								<div class="content">
+									<h4 class="file"><a href="{% url 'edit' v.id %}"></a>productname:{{v.productname}}</h4>
+									<p class="price with-discount">price:{{v.price}}</p>
+									<p class="price with-discount">cat:{{v.category.categoryname}}</p>
+									<p class="price with-discount">stock:{{v.stock}}</p>
+									<p class="price with-discount">details:{{v.details}}</p>
+									<p class="price with-discount"><a href="{% url 'delete' v.id %}">Delete</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End Single List  -->
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Home List  -->
+	{% endblock %}
+		<table>
+			<tr>
+				<th>productname</th>
+				<th>file</th>
+				<th>price</th>
+				<th>details</th>
+				<th>stock</th>
+				<th>category</th>
+				
+			</tr>
+				{% for v in data %}
+				<tr>
+					<td>{{v.productname}}</td>
+					<td><img src="{{v.file.url}}" height="100px" width="100px" alt="no pic"></td>
+					<td>{{v.price}}</td>
+					
+					<td>{{v.details}}</td>
+					<td>{{v.stock}}</td>
+					<td>{{v.category.categoryname}}</td>
+					<td><a href="{% url 'delete' v.id %}">Delete</a></td>
+					<td><a href="{% url 'edit' v.id %}">Edit</a></td>
+
+					
+					
+				</tr>
+					{% endfor %}
+		</table>
+	</body>
+		{% if messages %}
+			{% for msg in messages %}
+				<script>
+					alert('{{msg}}')
+				</script>
+			{% endfor %}
+		{% endif %}

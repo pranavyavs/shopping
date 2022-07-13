@@ -1,0 +1,63 @@
+{% extends 'base4.html' %}
+{% block content %}
+	<script type="text/javascript">
+		function validation()
+		{
+			var alpha=/^[a-zA-Z]+$/;
+			var num=/^[0-9]+$/;
+			
+			var email=/^[\w\-\.\+]+\@[a-z A-Z 0-9\.\-]+\.[a-z A-Z 0-9]{2,4}$/;
+			var search=document.getElementById("search");
+			if(search.value.length==0)
+				{
+					alert("please enter a productname");
+					return false;
+				}
+			else
+				{
+					return true;
+				}
+		}
+	</script>
+	<!-- Start Contact -->
+	<section id="contact-us" class="contact-us section">
+		<div class="container">
+				<div class="contact-head">
+					<div class="row">
+						<div class="col-lg-8 col-12">
+							<div class="form-main">
+								<div class="title">
+									
+									<h3>search product</h3>
+								</div>
+								<form method="post" action="{% url 'searchProductAction' %}">
+		                         {% csrf_token %}
+								 
+			
+									<div class="row">
+										<div class="col-12">
+											<div class="form-group">
+												<label>search<span>*</span></label>
+												<input type="text" class="form-control" name="search" id="search">
+											</div>
+										</div>
+										
+										<div class="row">
+										<div class="col-12">
+											<div class="form-group button">
+												<button type="submit" class="btn" style="margin-left:276px" onclick="return validation"()/>searchproduct</button>
+											</div>
+										</div>
+									</div>
+									
+								</form>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	</section>
+	<!--/ End Contact -->	
+	
+	{% endblock%}
